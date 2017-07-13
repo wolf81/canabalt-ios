@@ -20,6 +20,7 @@
 
 @class EAGLContext;
 @class UIWindow;
+@class UIViewController;
 
 typedef enum {
   FlxGameOrientationPortrait,
@@ -53,6 +54,7 @@ typedef enum {
   
   //
   UIWindow * window;
+  UIViewController * rootViewController;
   EAGLContext * context;
   GLuint renderBuffer;
   GLuint frameBuffer;
@@ -84,6 +86,7 @@ typedef enum {
 @property(nonatomic,assign) BOOL paused;
 @property(nonatomic,assign) NSInteger frameInterval;
 @property(nonatomic,readonly) UIWindow * window;
+@property(nonatomic,readonly) UIViewController * rootViewController;
 
 - (id) initWithOrientation:(FlxGameOrientation)gameOrientation state:(NSString *)InitialState;
 - (id) initWithOrientation:(FlxGameOrientation)gameOrientation state:(NSString *)InitialState zoom:(float)Zoom;

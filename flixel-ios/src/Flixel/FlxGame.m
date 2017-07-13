@@ -60,6 +60,7 @@ static CFTimeInterval gameStart;
 @dynamic paused;
 @synthesize frameInterval;
 @synthesize window;
+@synthesize rootViewController;
 
 - (BOOL) paused
 {
@@ -192,10 +193,15 @@ static CFTimeInterval gameStart;
     
     //do this before calling FlxG
     //create a window, and add glView to it
+    rootViewController = [UIViewController new];
     window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    window.rootViewController = rootViewController;
     //window.transform = CGAffineTransformMakeRotation(3*M_PI/2);
     
     FlxGLView * glView = [[FlxGLView alloc] initWithFrame:window.bounds];
+    glView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [rootViewController.view addSubview:glView];
+      
     //FlxGLView * glView = [[FlxGLView alloc] initWithFrame:CGRectMake(0,0,window.bounds.size.width/2,window.bounds.size.height/2)];
     //glView.transform = CGAffineTransformMakeScale(2.0,2.0);
     context = [glView.context retain];
@@ -206,7 +212,7 @@ static CFTimeInterval gameStart;
 
     [window makeKeyAndVisible];
     
-    [window addSubview:glView];
+//    [window addSubview:glView];
     glView.center = CGPointMake(window.bounds.size.width/2,
 				window.bounds.size.height/2);
     [glView release];
